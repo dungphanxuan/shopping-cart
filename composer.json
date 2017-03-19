@@ -54,7 +54,7 @@
     "bazilio/yii2-async": "dev-master",
     "kartik-v/yii2-widget-select2": "@dev",
     "kartik-v/yii2-widget-depdrop": "@dev",
-    "kartik-v/yii2-helpers": "dev-master"
+    "kartik-v/yii2-helpers1": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",
