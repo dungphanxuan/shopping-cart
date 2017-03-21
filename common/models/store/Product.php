@@ -2,31 +2,34 @@
 
 namespace common\models\store;
 
-use common\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "product_category".
+ * This is the model class for table "product".
  *
  * @property integer $id
  * @property string $name
  * @property string $slug
+ * @property integer $category_id
+ * @property string $description
+ * @property string $image_base_url
+ * @property string $image_base_path
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property integer $created_by
  * @property integer $updated_by
  */
-class ProductCategory extends \yii\db\ActiveRecord
+class Product extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'product_category';
+        return 'product';
     }
 
     public function behaviors()
@@ -43,9 +46,10 @@ class ProductCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required'],
-            [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['name', 'category_id'], 'required'],
+            [['category_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['description'], 'string'],
+            [['name', 'slug', 'image_base_url', 'image_base_path'], 'string', 'max' => 255],
         ];
     }
 
@@ -56,13 +60,17 @@ class ProductCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Tên nhóm',
-            'slug' => 'Bí danh',
-            'status' => 'Trạng thái',
-            'created_at' => 'Ngày tạo',
-            'updated_at' => 'Ngày sửa',
-            'created_by' => 'Người tạo',
-            'updated_by' => 'Người sửa',
+            'name' => 'Name',
+            'slug' => 'Slug',
+            'category_id' => 'Category ID',
+            'description' => 'Description',
+            'image_base_url' => 'Image Base Url',
+            'image_base_path' => 'Image Base Path',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'created_by' => 'Created By',
+            'updated_by' => 'Updated By',
         ];
     }
 

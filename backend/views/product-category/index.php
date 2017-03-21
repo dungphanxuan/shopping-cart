@@ -22,13 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
             'status',
             'created_at:datetime',
-            'updated_at:date',
+            'updated_at:datetime',
             [
                 'attribute' => 'created_by',
                 'format' => 'raw',
@@ -36,8 +34,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return isset($model->created)  ?   $model->created->username : ' ';
                 },
             ],
-             'updated_by',
-
+            [
+                'attribute' => 'updated_by',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return isset($model->updated)  ?   $model->updated->username : ' ';
+                },
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
