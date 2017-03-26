@@ -22,6 +22,19 @@ class m170319_110029_create_category_table extends Migration
             'created_by' => $this->integer(),
             'updated_by' => $this->integer(),
         ]);
+        //Seed data
+        for ($i = 1; $i <= 5; $i++) {
+            $this->insert('product_category', [
+                'id' => $i,
+                'name' => 'Product ' . $i,
+                'slug' => 'product_' . $i,
+                'created_at' => time(),
+                'updated_at' => time(),
+                'created_by' => 1,
+                'updated_by' => 1
+            ]);
+        }
+
     }
 
     /**

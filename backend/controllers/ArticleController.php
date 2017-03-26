@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\helpers\ArticleHelper;
+use common\models\store\ProductCategory;
 use Yii;
 use common\models\Article;
 use backend\models\search\ArticleSearch;
@@ -93,6 +94,7 @@ class ArticleController extends Controller
             return $this->render('create', [
                 'model' => $model,
                 'categories' => ArticleCategory::find()->active()->all(),
+
             ]);
         }
     }

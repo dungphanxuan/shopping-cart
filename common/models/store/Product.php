@@ -2,7 +2,11 @@
 
 namespace common\models\store;
 
+use common\models\ProductAttachment;
+use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "product".
@@ -24,11 +28,46 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 {
     /**
+     * @var array
+     */
+    public $product_image;
+
+    /**
+     * @var array
+     */
+    public $attachments;
+    /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'product';
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'attachments',
+                'multiple' => true,
+                'uploadRelation' => 'productAttachments',
+                'pathAttribute' => 'path',
+                'baseUrlAttribute' => 'base_url',
+                'orderAttribute' => 'order',
+                'typeAttribute' => 'type',
+                'sizeAttribute' => 'size',
+                'nameAttribute' => 'name',
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'product_image',
+                'pathAttribute' => 'image_base_path',
+                'baseUrlAttribute' => 'image_base_url'
+            ]
+        ];
     }
 
     /**
@@ -42,6 +81,7 @@ class Product extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['price'], 'number'],
             [['name', 'slug', 'image_base_url', 'image_base_path'], 'string', 'max' => 255],
+            [['product_image'], 'safe']
         ];
     }
 
@@ -52,18 +92,26 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'category_id' => 'Category ID',
-            'description' => 'Description',
-            'price' => 'Price',
+            'name' => 'Tên sản phẩm',
+            'slug' => 'Bí danh',
+            'category_id' => 'Danh mục',
+            'description' => 'Mô tả',
+            'price' => 'Giá',
             'image_base_url' => 'Image Base Url',
             'image_base_path' => 'Image Base Path',
+            'product_image' => 'Ảnh sản phẩm',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductAttachments()
+    {
+        return $this->hasMany(\common\models\store\ProductAttachment::className(), ['article_id' => 'id']);
     }
 }

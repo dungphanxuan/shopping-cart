@@ -55,10 +55,10 @@ $config = [
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js'=>['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js']
+                    'js'=>['']
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
-                    'css' => ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'],
+                    'css' => [''],
                 ],
                 'common\assets\Html5shiv' => [
                     'sourcePath' => null,
