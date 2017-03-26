@@ -3,8 +3,6 @@
 namespace common\models\store;
 
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "product".
@@ -14,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $slug
  * @property integer $category_id
  * @property string $description
+ * @property string $price
  * @property string $image_base_url
  * @property string $image_base_path
  * @property integer $status
@@ -32,14 +31,6 @@ class Product extends \yii\db\ActiveRecord
         return 'product';
     }
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            BlameableBehavior::className(),
-        ];
-    }
-
     /**
      * @inheritdoc
      */
@@ -49,6 +40,7 @@ class Product extends \yii\db\ActiveRecord
             [['name', 'category_id'], 'required'],
             [['category_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['description'], 'string'],
+            [['price'], 'number'],
             [['name', 'slug', 'image_base_url', 'image_base_path'], 'string', 'max' => 255],
         ];
     }
@@ -64,6 +56,7 @@ class Product extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'category_id' => 'Category ID',
             'description' => 'Description',
+            'price' => 'Price',
             'image_base_url' => 'Image Base Url',
             'image_base_path' => 'Image Base Path',
             'status' => 'Status',
@@ -72,18 +65,5 @@ class Product extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCreated()
-    {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
-    }
-
-    public function getUpdated()
-    {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 }

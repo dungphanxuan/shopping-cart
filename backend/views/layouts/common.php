@@ -159,7 +159,7 @@ $bundle = \backend\assets_b\BackendAsset::register($this);
                             'options'=>['class'=>'treeview'],
                             'items'=>[
                                 ['label'=>Yii::t('backend', 'Product Category'), 'url'=>['/product-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
-                                ['label'=>Yii::t('backend', 'Product'), 'url'=>['/article/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'Product'), 'url'=>['/product/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                               ]
                         ],
                         [
