@@ -40,68 +40,18 @@ $bundle = \frontend\assets\StoreAsset::register($this);
         <a href="#" title="View All">View All</a>
     </div>
     <div class="col-md-10">
-        <div class="product-slide">
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product1.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">50.23$</p>
-                </div>
-            </div>
-            <!-- End product -->
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product2.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">40.09$</p>
-                </div>
-            </div>
-            <!-- End product -->
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product3.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">50.25$</p>
-                </div>
-            </div>
-            <!-- End product -->
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product4.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">46.56$</p>
-                </div>
-            </div>
-            <!-- End product -->
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product5.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">46.56$</p>
-                </div>
-            </div>
-            <!-- End product -->
-            <div class="product">
-                <div class="images">
-                    <a href="#" title="images"><img src="<?= $this->assetManager->getAssetUrl($bundle, 'images/product5.jpg')?>" alt="images"></a>
-                </div>
-                <div class="text">
-                    <a href="#" class="product-title" title="Chemistry">Chemistry</a>
-                    <p class="price">46.56$</p>
-                </div>
-            </div>
-            <!-- End product -->
-        </div>
+        <?=
+        \yii\widgets\ListView::widget([
+            'dataProvider' => $listDataProvider,
+            'options' => [
+                'tag' => 'div',
+                'class' => 'product-slide',
+                'id' => 'list-wrapper',
+            ],
+            'layout' => "{items}",
+            'itemView' => '_product_item',
+        ]);
+        ?>
         <!-- End product-slide -->
     </div>
 </div>
